@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#show{
+				width: 300px;
+				height: 200px;
+				border: 1px solid black;
+				overflow: hidden;
+				position: relative;
+			}
+			.imgs{
+				width: 2000px;
+				list-style: none;
+				position: absolute;
+				left: -300px;
+			}
+			.imgs li{
+				float: left;
+			}
+		</style>
+		<script !src="">
+			window.onload=function () {
+				var imgs=document.getElementById("imgs");
+				console.log(getComputedStyle(imgs).left);
+				var goleft=document.getElementById("go_left");
+				var goright=document.getElementById("go_right");
+                var time1=null,time2
+				goleft.onclick=function () {
+//					clearInterval(time1);
+					time1=setInterval(showd,10);
+					clearInterval(time2);
+				};
+				goright.onclick=function () {
+					clearInterval(time2);
+					time2=setInterval(show,10);
+					clearInterval(time1);
+				};
+				
+				
+				function show() {
+//					var left=imgs.style.left;
+                    var left=getComputedStyle(imgs).left;
+
+
+					console.log("left:"+left);
+					
+					left=left=="-1200px"?"0px":left;
+					var step= (left).slice(0,left.length-2);
+					imgs.style.left=(Number(step)-1)+"px";
+				}
+				
+				function showd() {
+					var left=getComputedStyle(imgs).left;
+//                    var left=imgs.offsetLeft;
+					console.log("left:"+left);
+					left=left=="0px"?"-1200px":left
+					
+					var step= (left).slice(0,left.length-2);
+					imgs.style.left=(Number(step)+1)+"px";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="" id="show">
+			<ul class="imgs" id="imgs">
+				<li><img src="images/04.jpg" alt=""></li>
+				<li><img src="images/01.jpg" alt=""></li>
+				<li><img src="images/02.jpg" alt=""></li>
+				<li><img src="images/03.jpg" alt=""></li>
+				<li><img src="images/04.jpg" alt=""></li>
+				<li><img src="images/01.jpg" alt=""></li>
+			
+			</ul>
+		</div>
+		<div>
+			<button id="go_left">向左</button>
+			<button id="go_right">向右</button>
+		</div>
+
+	</body>
+</html>

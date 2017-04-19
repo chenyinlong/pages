@@ -1,0 +1,61 @@
+/*重置部分样式*/
+*{
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    background-color: #F9F9F9;
+}
+input {outline:none;border:none;}
+
+.menu-ul{
+    overflow: hidden;
+    list-style: none;
+}
+.menu-li{
+    float: left;
+}
+
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.ofh{
+    overflow: hidden;
+}
+
+.dpib{
+    display: inline-block;
+
+}
+.dpb{
+    display: block;
+}
+.dpi{
+    display: inline;
+}
+.cb{
+clear: both;
+}
+
+.pa{
+    position: absolute;
+}
+.pr{
+    position: relative;
+}
+.bdb1sf{
+    border-bottom: 1px solid #F1F1F1;
+}
+.bdr1sf{
+    border-right: 1px solid #F1F1F1;
+}
+.bdt1sf{
+    border-top: 1px solid #F1F1F1;
+}
+

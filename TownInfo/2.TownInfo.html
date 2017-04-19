@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.1.1.js"></script>
+    <script>
+        //        D:\WEB\20161226\work\info\ChineseCities.json
+
+        $(function () {
+            var cityDate = null;
+            $.getJSON("info/ChineseCities.json", function (date) {
+                cityDate = date;  //将数据保存到内存中
+
+                //将省的数据动态添加到省份下拉菜单中
+                $.each(date, function (i, item) {
+                    $("#province").append($("<option value=" + i + ">" + item.name + "</option>"));
+                });
+
+                $("#province").removeAttr("disabled"); //数据加载完成  省 下拉菜单 变为可用
+            });
+
+            $("#province").change(function () {
+//                console.log();
+
+                $("#town").empty().append("<option value='999'>--请选择城市--</option>");
+                $("#county").empty().append("<option value='999'>--请选择城市--</option>");
+
+                var inedx = $("#province").children('option:selected').index() - 1;
+                console.log(cityDate[inedx]);
+                $.each(cityDate[inedx].city, function (i, item) {
+                    $("#town").append($("<option value=" + i + ">" + item.name + "</option>"));
+                });
+                $("#town").removeAttr("disabled");
+            });
+
+            $("#town").change(function () {
+                console.log();
+//                alert("town change");
+                var inedx1 = $("#province").children('option:selected').index() - 1;
+                var inedx2 = $("#town").children('option:selected').index() - 1;
+                var area = cityDate[inedx1].city[inedx2].area;
+                console.log(area);
+                $.each(area, function (i, item) {
+                    $("#county").append($("<option value=" + item + ">" + item + "</option>"));
+                });
+                $("#county").removeAttr("disabled");
+            });
+        });
+    </script>
+</head>
+<body>
+<div>
+    <label for="province">省：</label><select name="" id="province" disabled>
+    <option value="999">--请选择省份--</option>
+</select><br>
+    <label for="town">市：</label><select name="" id="town" disabled>
+    <option value="999">--请选择城市--</option>
+</select><br>
+    <label for="county">区县：</label><select name="" id="county" disabled>
+    <option value="999">--请选择城市--</option>
+</select><br>
+</div>
+</body>
+</html>
